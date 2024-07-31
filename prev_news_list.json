@@ -1,0 +1,58 @@
+[
+    {
+        "prevNewsId" : 401,
+		"title" : "[커피클래스] 7월 폴 바셋 캐쥬얼 커피클래스",
+		"prev_news_thumbnail" : "@/assets/prev_news/thumbnail/july_coffee_class.jpg",
+		"prev_news_img" : "@/assets/prev_news/july_coffee_class.jpg",
+		"content" : "" 
+    },
+    {
+        "prevNewsId" : 402,
+		"title" : "[프로모션] 신메뉴 크라운 추가적립 이벤트",
+		"prev_news_thumbnail" : "@/assets/prev_news/thumbnail/new_menu_point.jpg",
+		"prev_news_img" : "@/assets/prev_news/new_menu_point.jpg",
+		"content" : "" 
+    },
+    {
+        "prevNewsId" : 403,
+		"title" : "[프로모션] 쿠팡이츠 할인 프로모션 (6.3 - 6.9)",
+		"prev_news_thumbnail" : "@/assets/prev_news/thumbnail/coupang_eats.jpg",
+		"prev_news_img" : "@/assets/prev_news/coupang_eats.jpg",
+		"content" : "6/3 - 6/9, 7일간 폴 바셋을 쿠팡이츠에서 2만원 이상 이용하시면 2,000원을 할인해 드려요! 집, 회사 어디서든 폴 바셋을 보다 편리하고 편안하게 만나보세요" 
+    },
+    {
+        "prevNewsId" : 404,
+		"title" : "[프로모션] Have a WonderPaul DAY!",
+		"prev_news_thumbnail" : "@/assets/prev_news/thumbnail/wonderpaul.jpg",
+		"prev_news_img" : "@/assets/prev_news/wonderpaul.jpg",
+		"content" : "샌드위치 2종 출시 기념 특별한 혜택WonderPaul DAY 이벤트 기간 : 05/24~05/31까지 샌드위치 2종(BELT/에그샐러드) 중 택1 구매 시 아메리카노를 50% OFF 가격에 드리는 특별한 혜택을 지금 폴 바셋 매장에서 만나보세요! [유의사항] 텀블러 할인 외 중복할인 불가하며 음료변경 불가합니다. 자세한 내용은 매장에 문의해주세요. [이벤트 미참여 매장] 신세계백화점 본점, 롯데백화점 대구점, 스타필드 수원점, 현대모터스튜디오서울점, 신세계백화점 의정부점, 롯데마트 양평점, 청량리역점, 신세계백화점 강남점, 롯데월드몰점, 신세계아울렛 파주점, 신세계아울렛 여주점, 제주 이호 DT점, 제주 용담 DT점, 제주 아라 DT점, 롯데아울렛 기흥점" 
+    },
+    {
+        "prevNewsId" : 405,
+		"title" : "[프로모션] 5만원 이상 자동 충전 시, 1+1 쿠폰 증정",
+		"prev_news_thumbnail" : "@/assets/prev_news/thumbnail/1+1_coupon.jpg",
+		"prev_news_img" : "@/assets/prev_news/1+1_coupon.jpg",
+		"content" : "" 
+    },
+    {
+        "prevNewsId" : 406,
+		"title" : "[신제품] 샌드위치 2종",
+		"prev_news_thumbnail" : "@/assets/prev_news/thumbnail/sandwich.jpg",
+		"prev_news_img" : "@/assets/prev_news/sandwich.jpg",
+		"content" : "부드럽고 촉촉한 탕종 식빵 사이에 폴 바셋 레시피로 만든 에그샐러드, 소스와 야채가 듬뿍. 에그샐러드 샌드위치와 BELT 샌드위치는 5/14(화)부터 폴 바셋 매장에서 만나보세요. [제품 가격] 에그샐러드 샌드위치 5,900원 BELT 샌드위치 6,900원 [미판매매장] 신세계백화점 본점, 롯데백화점 대구점, 스타필드 수원점, 현대모터스튜디오서울점, 신세계백화점 의정부점, 롯데마트 양평점, 청량리역점, 신세계백화점 강남점, 롯데월드몰점, 신세계아울렛 파주점, 신세계아울렛 여주점, 제주 이호 DT점, 제주 용담 DT점, 제주 아라 DT점, 롯데아울렛 기흥점" 
+    },
+    {
+        "prevNewsId" : 407,
+		"title" : "[프로모션] 피자 폴 바셋 가정의 달 이벤트",
+		"prev_news_thumbnail" : "@/assets/prev_news/thumbnail/pizza.jpg",
+		"prev_news_img" : "@/assets/prev_news/pizza.jpg",
+		"content" : "행복 넘치는 5월, 피자 폴 바셋에서 소중한 사람과 따뜻한 시간을 함께하세요. [이벤트 내용] 1) 신메뉴 주문 시 아이스크림 라떼 50% 할인 2) 피자 주문 시 크라운 추가 적립 [진행 매장] 증미역점, 대전엑스포 스카이점, 제주 용담 DT점" 
+    },
+    {
+        "prevNewsId" : 408,
+		"title" : "[프로모션] 가정의달 e-card 이벤트",
+		"prev_news_thumbnail" : "@/assets/prev_news/thumbnail/e_card.jpg",
+		"prev_news_img" : "@/assets/prev_news/e_card.jpg",
+		"content" : "" 
+    }
+]
