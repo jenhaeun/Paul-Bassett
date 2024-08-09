@@ -1,4 +1,57 @@
 <template>
+<<<<<<< HEAD
+  <v-container>
+    <div class="header">
+      <div @click="goBack" class="goBack">
+        <v-icon size="28">chevron_left</v-icon>
+      </div>
+      <p class="menu_title">주문내역</p>
+    </div>
+    <v-row cols="8" offset="2">
+      <v-col cols="12" class="d-flex justify-between mb-4">
+      </v-col>
+      <v-col cols="12" class="grey lighten-4 pa-6">
+        <v-row v-for="order in paginatedOrderItems" :key="order.id" class="white mb-4 rounded-lg">
+          <v-col cols="12">
+            <div class="d-flex justify-space-between align-center">
+              <div>
+                <p class="P_12 text_gray500">{{ order.storeInfo ? order.storeInfo.name : '-' }}</p>
+                <p class="P_20 font-weight-bold">주문일: {{ order.orderDate }}</p>
+              </div>
+              <div class="text-end mr-2">
+                <v-chip :color="order.statusColor" dark>{{ order.status }}</v-chip>
+                <p class="P_12 text_gray500 mt-5">결제금액</p>
+                <p class="P_16 text_pink font-weight-bold">
+                  {{ order.totalPrice ? order.totalPrice.toLocaleString() : '정보 없음' }}원
+                </p>
+              </div>
+            </div>
+            <v-divider class="my-4"></v-divider>
+            <v-row v-for="item in order.items" :key="item.id" class="d-flex align-center">
+              <v-col cols="4">
+                <v-img :src="item.img" :alt="item.name" style="width: 90px;" class="rounded-xl mb-2"></v-img>
+              </v-col>
+              <v-col cols="8">
+                <div class="d-flex justify-space-between align-center">
+                  <div>
+                    <p class="P_16 font-weight-bold">{{ item.name }}</p>
+                    
+                  </div>
+                  <div class="text-end">
+                    <p class="P_16 font-weight-bold">{{ item.quantity }}개</p>
+                    <p class="P_16 font-weight-bold">
+                      {{ item.totalPrice }}원
+                    </p>
+                  </div>
+                </div>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
+=======
     <v-container style="padding: 0;">
         <v-row>
             <div class="pa-3">
@@ -155,12 +208,59 @@
             </div>
         </v-row>
     </v-container>
+>>>>>>> 3b333d0dc4f802f232c97edd579aded4a9be9014
 </template>
 
 <script>
 import { statusList } from '@/datasources/order_status.js';
 
 export default {
+<<<<<<< HEAD
+  data() {
+    return {
+      order_status: [
+        '주문상태(전체)',
+        '주문요청',
+        '주문접수',
+        '준비완료',
+        '수령완료',
+        '미수령',
+        '결제취소'
+      ],
+      orderItems: [], // 주문 데이터
+      page: 1,
+      itemsPerPage: 10
+    };
+  },
+  computed: {
+    paginatedOrderItems() {
+      // 내림차순 정렬
+      const sortedOrders = [...this.orderItems].sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+      
+      // 페이지네이션
+      const start = (this.page - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return sortedOrders.slice(start, end);
+    },
+    totalPages() {
+      return Math.ceil(this.orderItems.length / this.itemsPerPage);
+    }
+  },
+  created() {
+    this.loadOrderItems();
+  },
+  methods: {
+    loadOrderItems() {
+      const savedOrderItems = localStorage.getItem('orderHistory');
+      if (savedOrderItems) {
+        this.orderItems = JSON.parse(savedOrderItems).map(order => ({
+          ...order,
+        }));
+      }
+    },
+    goBack() {
+      this.$router.go(-1);
+=======
     data () {
         return {
         filter: {},
@@ -244,6 +344,7 @@ export default {
         } else {
             html.style.overflow = 'auto'}
         }
+>>>>>>> 3b333d0dc4f802f232c97edd579aded4a9be9014
     }
 }
 </script>

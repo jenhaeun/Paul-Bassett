@@ -11,11 +11,17 @@ import gift from "@/components/gift.vue"
 import MenuDetail from "@/components/MenuDetail.vue"
 import Cart from '@/components/cart.vue'
 import StoreSelection from "@/components/StoreSelection.vue"
+import Coupon from "@/components/Coupon.vue";
 import KakaoMap from "@/components/KakaoMap.vue"
 import OrderHistory from "@/components/OrderHistory.vue"
 import OrderInfo from "@/components/OrderInfo.vue"
+<<<<<<< HEAD
+import JoinEnd from "@/components/JoinEnd.vue";
+import likemenulist from "@/components/likemenulist.vue"
+=======
 import JoinEnd from "@/components/JoinEnd.vue"
 import Coupon from "@/components/Coupon.vue";
+>>>>>>> 3b333d0dc4f802f232c97edd579aded4a9be9014
 
 
 Vue.use(VueRouter)
@@ -25,6 +31,11 @@ const routes = [
     path: "/",
     name: "Main",
     component: Main
+  },
+    {
+    path: "/likemenulist",
+    name: "likemenulist",
+    component: likemenulist
   },
   {
     path: "/Menu",
@@ -45,6 +56,11 @@ const routes = [
     path: "/MyPage",
     name: "MyPage",
     component: MyPage
+  },
+  {
+    path: "/Coupon",
+    name: "Coupon",
+    component: Coupon
   },
   {
     path: "/Login",

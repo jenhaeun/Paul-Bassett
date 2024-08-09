@@ -45,6 +45,26 @@
 import KakaoMap from "./KakaoMap.vue";
 import { CommonOption } from '@/datasources/StoreList';
 
+<<<<<<< HEAD
+export default {
+  name: "StoreSelection",
+  data() {
+    return {
+      tab: "stores",
+      stores: CommonOption.locationList,
+    };
+  },
+  components: {
+    KakaoMap,
+  },
+  methods: {
+    selectStore(store) {
+      this.$store.dispatch('selectStore', store); // 선택한 매장을 스토어에 저장
+      this.$router.push('/Menu'); // 홈 페이지로 이동
+    }
+  }
+};
+=======
 export default{
     name:"StoreSelection",
     data(){
@@ -69,8 +89,8 @@ export default{
     }
 }
 
+>>>>>>> 3b333d0dc4f802f232c97edd579aded4a9be9014
 </script>
-
 <style>
 .loclist_box{
     display: flex;

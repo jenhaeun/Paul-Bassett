@@ -49,6 +49,33 @@
             </v-col>
         </v-row>
 
+<<<<<<< HEAD
+    <v-row class="white mt-6 pl-10 pr-10">
+      <v-col cols="12" class="d-flex justify-space-between" v-for="item in cartItems" :key="item.id">
+        <v-col cols="4">
+          <v-img :src="item.img" :alt="item.name" style="width: 110px;" class="rounded-xl ml-2"></v-img>
+        </v-col>
+        <v-col cols="8" class="pa-5">
+          <div class="d-flex justify-space-between">
+            <p>{{ item.name }}</p>
+            <p>{{ item.totalPrice.toLocaleString() }}원</p>
+          </div>
+          <p class="text_gray300">{{ item.options.IceHot }}</p>
+          <p class="text-end mt-8">{{ item.totalPrice.toLocaleString() }}원</p>
+        </v-col>
+      </v-col>
+      <v-col cols="12" style="padding: 0;">
+        <v-divider></v-divider>
+      </v-col>
+      <v-col cols="12" class="d-flex justify-space-between pa-4 font-weight-bold">
+        <p class="text_brown">결제 금액</p>
+        <p class="text_pink">{{ cartTotalPrice.toLocaleString() }}원</p>
+      </v-col>
+    </v-row>
+    <div class="text-center mt-5">
+      <v-btn @click="showPaymentCompleteModal" style="width: 210px;" large>결제하기</v-btn>
+    </div>
+=======
         <v-card>
             <v-row>
             <v-col md="10" offset-md="1" class="text-center">
@@ -82,6 +109,7 @@
             </v-col>
             </v-row>
         </v-card>
+>>>>>>> 3b333d0dc4f802f232c97edd579aded4a9be9014
 
         <v-row cols="12" class="white mt-7 pa-2">
             <v-col cols="12">
@@ -157,6 +185,41 @@ export default{
     computed: {
 
     },
+<<<<<<< HEAD
+    async showPaymentCompleteModal() {
+      this.isPaymentCompleteModalOpen = true;
+
+      const newOrder = {
+        id: Date.now(),
+        items: this.cartItems.map(item => ({
+          ...item,
+          totalPrice: item.price * item.quantity
+        })),
+        orderDate: new Date().toLocaleString(),
+        totalPrice: this.cartTotalPrice,
+        expiryDate: (() => {
+          const orderDate = new Date();
+          orderDate.setFullYear(orderDate.getFullYear() + 1);
+          return orderDate.toLocaleString();
+        })()
+      };
+
+      // 주문 내역을 Vuex에 추가
+      await this.$store.dispatch('addOrderHistory', newOrder);
+
+      // 결제 후 장바구니 비우기
+      await this.$store.dispatch('clearCart');
+
+      // 결제 완료 후 라우팅
+      this.$router.push('/OrderHistory');
+    }
+  }
+};
+</script>
+
+<style scoped>
+/* Styles here */
+=======
     components: {
 
     },
@@ -219,4 +282,5 @@ v-col{
 .text_brown{
     color: #503629;
 }
+>>>>>>> 3b333d0dc4f802f232c97edd579aded4a9be9014
 </style>

@@ -9,21 +9,22 @@
         <v-card class="membership">
           <div class="card_title_wrap">
             <h3 class="card-title">
-              @@@님의 MY CROWN
+              {{ userInfo.uname }} 님의 MY CROWN
               <img src="../assets/mainimage/logo.png" class="logo" />
             </h3>
             <p>
-              07
-              <span class="num_gray">/ 12</span>
+              {{ stamps }}
+              <span class="num_gray">/ 10</span>
             </p>
+            
           </div>
 
           <div class="progress_size">
             <div class="progress_bar">
-              <div class="progress"></div>
+              <div class="progress" :style="{ width: `${(stamps / 10) * 100}%` }"></div>
             </div>
           </div>
-          <v-card-subtitle>3개만 더 채우면 @@@크라운으로 올라가요!</v-card-subtitle>
+          <v-card-subtitle>{{ 10 - stamps }}개만 더 채우면 @@@크라운으로 올라가요!</v-card-subtitle>
 
           <div class="my_btn_wrap">
             <div class="my_btn">
@@ -41,6 +42,17 @@
     </v-row>
 
     <v-row>
+      <v-col cols="10" offset="1" class="mt-5">
+      <h3>나만의 메뉴</h3>
+        <div class="my_menu">
+        <div v-for="item in favoriteList" :key="item.id" class="">
+          <div class="my_menu list">
+            <v-img class="menu_recom mt-3" width="100" :src="item.img" cover />
+            <p class="mt-2">{{ item.title }}</p>
+          </div>
+        </div>
+      </div>
+    </v-col>
       <v-col cols="10" offset="1" class="mt-5">
         <h3>추천 메뉴</h3>
         <v-slide-group class="mt-3">
@@ -92,14 +104,34 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
-  name: "Main",
+  data() {
+    return {
+      username: '',
+      favoriteList: [],
+      stamps: 0,
+      orderHistory: [],
+      userInfo: JSON.parse(localStorage.getItem("loggedInUser")) || {},
+    };
+  },
+  created() {
+    this.loadOrderHistory();
+    this.loadFavorites();
+  },
+  methods: {
+    loadOrderHistory() {
+      const savedOrderHistory = localStorage.getItem('orderHistory');
+      if (savedOrderHistory) {
+        this.orderHistory = JSON.parse(savedOrderHistory);
+        this.stamps = this.orderHistory.length;
+      }
+    },
+    loadFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      this.favoriteList = favorites;
     }
   }
-};
+}
 </script>
-
 <style>
 
 .membership {
@@ -185,4 +217,111 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
+
+.my_menu{
+  width: 100%;
+  display: flex;
+}
+.my_menu_list > img{
+ width: 100px !important;
+ height: 100px !important;
+}
+
+</style>
+
+.membership {
+  margin-top: -80px;
+  border-radius: 15px !important;
+}
+.center {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.logo {
+  width: 35px;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+}
+
+.card_title_wrap {
+  padding: 16px 20px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.num_gray {
+  color: rgb(180, 180, 180);
+}
+
+.recom_wrap {
+  display: flex;
+}
+
+.recom_size{
+  width:8%;
+  text-align: center;
+  margin-right: 14px ;
+}
+
+.news_wrap {
+  display: flex;
+  margin-bottom: 100px;
+}
+
+.news_size{
+  width:20%;
+  margin-right: 14px ;
+  overflow: hidden;
+}
+
+.progress_size {
+  width: 93%;
+  margin: auto;
+}
+
+.progress_bar {
+  width: 100%;
+  height: 5px;
+  background-color: #dedede;
+}
+
+.progress_bar .progress {
+  width: 72%;
+  height: 5px;
+  background-color: #e80a4d;
+}
+
+.my_btn {
+  padding: 10px 15px 10px 15px;
+  border: 1px solid #dedede;
+  display: flex;
+  width: 49%;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  justify-content: space-between;
+}
+
+.my_btn_wrap {
+  width: 93%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.my_menu{
+  width: 100%;
+  display: flex;
+}
+.my_menu_list > img{
+ width: 100px !important;
+ height: 100px !important;
+}
+
 </style>

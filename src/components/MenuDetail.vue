@@ -9,6 +9,9 @@
     </div>
     <p class="menu_title">메뉴상세</p>
   <div class="right_icons">
+
+
+
   <div class="favorite_btn" @click="handleFavoriteClick">
       <v-icon size="24" :color="isFavorite ? 'red' : '#000000'">
         {{ isFavorite ? 'mdi-heart' : 'mdi-heart-outline' }}
@@ -403,30 +406,27 @@ export default {
     return {
       item: null,
       CommonOption,
-      // 모달창
+      showAddToCartModal: false,
       showLoginModal: false,
       showAddFavoriteModal: false,
       showRemoveFavoriteModal: false,
-      showAddToCartModal: false,
       isFavorite: false,
-      showBottomSheet: false,
-      
       selectedOptions: {
-        IceHot: 'hot', // 기본값 설정
+        IceHot: 'hot',
         size: 'standard',
         packaging: '매장에서',
         cupType: '매장용',
         extraShot: 'none',
         shotQuantity: 0,
         iceCreamTopping: 'none',
-        milkType: 'normal', 
+        milkType: 'normal',
         sugar: 'normal',
         HotLevel: 'normal',
         waterAmount: 'normal',
         powder: 'normal',
         cream: 'normal'
       },
-      quantity: 1, // 기본 수량 
+      quantity: 1,
     };
   },
   created() {
@@ -448,11 +448,12 @@ export default {
       ...itemlist.BaristaProductList,
       ...itemlist.ProductList
     ];
-
-    this.item = allItems.find(item => item.Id === id); // 해당 ID의 아이템 찾기
+    this.item = allItems.find(item => item.Id === id);
+    this.checkIfFavorite(); // 컴포넌트 초기화 시 찜 상태 확인
   },
   computed: {
-    // ...mapGetters(['isLoggedIn', 'cartQuantity']), // isLoggedIn을 computed로 가져와야 한다면 사용
+
+    
     isLoggedIn() {
       return !!localStorage.getItem('loggedInUser');
     },
@@ -467,45 +468,37 @@ export default {
     },
     totalPrice() {
       let basePrice = parseInt(this.item.BasePrice, 10);
-
-      // 사이즈 변경 가격
       if (this.selectedOptions.size) {
         const sizeOption = this.CommonOption.size.find(option => option.value === this.selectedOptions.size);
         if (sizeOption) {
           basePrice += sizeOption.price;
         }
       }
-
-      // 샷 추가 가격 계산
       if (this.selectedOptions.extraShot === 'extraShot') {
         basePrice += this.CommonOption.extraShot.price * this.selectedOptions.shotQuantity;
       }
-
-      // 아이스크림 토핑 추가 가격
       if (this.selectedOptions.iceCreamTopping && this.selectedOptions.iceCreamTopping !== 'none') {
         const toppingOption = this.CommonOption.IceCreamtopping.find(option => option.value === this.selectedOptions.iceCreamTopping);
         if (toppingOption) {
           basePrice += toppingOption.price;
         }
       }
-
-      return basePrice * this.quantity; // 총 가격에 수량을 곱한 값 반환
+      return basePrice * this.quantity;
     },
   },
   methods: {
-    ...mapActions([ 'addToCart']),
+    ...mapActions(['addToCart']),
     handleFavoriteClick() {
       if (!this.isLoggedIn) {
-        this.showLoginModal = true; // 로그인 필요 모달 띄우기
+        this.showLoginModal = true;
         return;
       }
-
-      // 로그인 상태일 때 처리 로직
       this.isFavorite = !this.isFavorite;
-
       if (this.isFavorite) {
+        this.saveToFavorites();
         this.showAddFavoriteModal = true;
       } else {
+        this.removeFromFavorites();
         this.showRemoveFavoriteModal = true;
       }
     },
@@ -514,24 +507,25 @@ export default {
     },
     handleAddToCart() {
       if (!this.isLoggedIn) {
-        this.showLoginModal = true; // 로그인 필요 모달 띄우기
+        this.showLoginModal = true;
         return;
       }
-      // 장바구니에 아이템 추가
+      const uniqueIdentifier = this.generateUniqueIdentifier();
       this.addToCart({
-        id: this.item.Id,
+        id: uniqueIdentifier,
         name: this.item.Title,
         quantity: this.quantity,
         totalPrice: this.totalPrice,
         img: this.currentImageUrl,
         options: this.selectedOptions
       });
-
-      this.showAddToCartModal = true; // 장바구니에 추가됨 모달 띄우기
+      this.showAddToCartModal = true;
     },
-    
+    generateUniqueIdentifier() {
+      return `${this.item.Id}-${JSON.stringify(this.selectedOptions)}`;
+    },
     handleOrderNow() {
-      this.$route.push('/OrderInfo');
+      this.$router.push('/OrderInfo');
     },
     goBack() {
       this.$router.go(-1);
@@ -579,11 +573,31 @@ export default {
         cream: '크림'
       };
       return formattedKeys[key] || key;
+    },
+    saveToFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const existingIndex = favorites.findIndex(fav => fav.id === this.item.Id);
+      if (existingIndex === -1) {
+        favorites.push({
+          id: this.item.Id,
+          title: this.item.Title,
+          img: this.currentImageUrl
+        });
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+      }
+    },
+    removeFromFavorites() {
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      favorites = favorites.filter(fav => fav.id !== this.item.Id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    },
+    checkIfFavorite() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      this.isFavorite = favorites.some(fav => fav.id === this.item.Id);
     }
   }
-}
+};
 </script>
-
 <style>
 
 .container {

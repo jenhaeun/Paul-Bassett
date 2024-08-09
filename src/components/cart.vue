@@ -6,6 +6,74 @@
         chevron_left
       </v-icon>
     </div>
+<<<<<<< HEAD
+
+<div class="select_area">
+    <div class="select_area_left">
+      <span class="card_title">
+        <v-icon>location_on</v-icon> {{ selectedStore ? selectedStore.name : '매장 선택 필요' }}
+      </span>
+      <span class="card_subtitle">
+        {{ selectedStore ? selectedStore.address : '주소정보 필요' }}
+      </span>
+    </div>
+
+  </div>
+    <h3> 담긴수량 ( {{ cartQuantity }} )</h3>
+        <v-row class="white mt-6 pl-10 pr-10">
+      <v-col cols="12" class="d-flex P_12" style="padding: 20px 0 0;">
+        <p></p>
+      </v-col>
+      <v-col cols="12" class="d-flex justify-space-between" style="padding: 0;" v-for="item in cartItems" :key="item.id">
+        <v-col cols="4">
+          <v-img :src="item.img" :alt="item.name" style="width: 110px;" class="rounded-xl ml-2"></v-img>
+        </v-col>
+        <v-col cols="8" class="pa-5">
+          <div class="d-flex justify-space-between P_16">
+            <p>{{ item.name }}</p>
+            <p> 수량 {{ item.quantity  }}</p>
+
+            <p v-if="item.options.extraShot">샷추가</p>
+
+                <p> {{ item.options.shotQuantity }} </p>
+
+            <p>{{ item.totalPrice.toLocaleString() }}원</p>
+          </div>
+          <!-- <div class="d-flex justify-space-between P_12 text_gray300">
+            <p v-if="item.options.extraShot">샷추가</p>
+            <p v-if="item.options.extraShot">+1000원</p>
+          </div> -->
+          <p>옵션 확인</p>
+                <div v-for="(value, key) in getFilteredOptions(item.id)" :key="key">
+                  <p class="P_12 text_gray300">{{ formatOptionKey(key) }}: {{ value }}</p>
+                  <p>  </p>
+                </div>
+
+          <p class="text-end mt-8">{{ item.totalPrice.toLocaleString() }}원</p>
+        </v-col>
+      </v-col>
+      <v-col cols="12" style="padding: 0;">
+        <v-divider></v-divider>
+      </v-col>
+      <v-col cols="12" class="d-flex justify-space-between P_24 pa-4 font-weight-bold">
+        <p class="text_brown">결제 금액</p>
+        <p class="text_pink">{{ cartTotalPrice.toLocaleString() }}원</p>
+      </v-col>
+    </v-row>
+    
+    <div class="text-center mt-5">
+<!-- 주문하기 버튼 비활성화 조건 추가 -->
+        <v-btn
+          @click="handleOrderClick"
+          color="black"
+          class="text_white pa-4 ma-2"
+          style="width: 210px;"
+          large
+          :disabled="cartItems.length === 0 || cartTotalPrice === 0"
+        >
+          주문하기
+        </v-btn>
+=======
     <!-- <p class="menu_title">메뉴상세</p> -->
       <p class="menu_title">장바구니 ( {{ cartQuantity }} )</p>
     <div @click="clearCart" class="delete">
@@ -66,6 +134,7 @@
           </v-expansion-panel>
         </v-expansion-panels>  
       </div>
+>>>>>>> 3b333d0dc4f802f232c97edd579aded4a9be9014
     </div>
   </div>
 </template>
@@ -82,6 +151,9 @@ export default {
   },
   computed: {
     ...mapGetters(['cartItems', 'cartQuantity', 'cartTotalPrice']),
+    selectedStore() {
+      return this.$store.getters.selectedStore;
+    },
     formatOptionKey() {
       const formattedKeys = {
         IceHot: '온도',

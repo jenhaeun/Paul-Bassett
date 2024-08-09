@@ -28,6 +28,14 @@
         </v-card>
       </v-col>
       <v-col cols="12">
+<<<<<<< HEAD
+        
+          <router-link to="/likemenulist" class="pa-4 menu_list">
+            <h4>좋아요 목록</h4> 
+            <v-icon>arrow_forward_ios</v-icon>
+          </router-link>
+=======
+>>>>>>> 3b333d0dc4f802f232c97edd579aded4a9be9014
         <router-link to="/Orderhistory" class="pa-4 menu_list">
           <h4>주문 내역</h4>
           <v-icon>arrow_forward_ios</v-icon>
